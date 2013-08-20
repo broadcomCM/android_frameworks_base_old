@@ -63,10 +63,14 @@ public class LightsService {
 
     private static final String FLASHLIGHT_FILE;
     private static final String FLASHLIGHT_FILE_SPOTLIGHT = "/sys/class/leds/spotlight/brightness";
+    private static final String FLASHLIGHT_FILE_BROADCOM = "/sys/class/camera/camera/camflash";
     static {
         File ff = new File(FLASHLIGHT_FILE_SPOTLIGHT);
+        File camflash = new File(FLASHLIGHT_FILE_SPOTLIGHT);
         if (ff.exists()) {
             FLASHLIGHT_FILE = FLASHLIGHT_FILE_SPOTLIGHT;
+        } else if (camflash.exists()) {
+            FLASHLIGHT_FILE = FLASHLIGHT_FILE_BROADCOM;
         } else {
             FLASHLIGHT_FILE = "/sys/class/leds/flashlight/brightness";
         }
